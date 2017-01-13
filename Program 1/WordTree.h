@@ -1,7 +1,10 @@
 #pragma once
 #include <string>
 #include <iostream>
+/*
+Class WordTree
 
+*/
 class WordTree
 {
 	friend std::ostream& operator<<(std::ostream&, const WordTree&);
@@ -9,7 +12,7 @@ public:
 	WordTree();
 	~WordTree();
 	
-	void add(std::string& word);
+	void add(std::string word);
 	const int numWords() const;
 private:
 	struct WordNode { 
@@ -25,5 +28,9 @@ private:
 		}
 	};
 	WordNode* root;
+	void addHelper(std::string, WordNode* currentNode);
+	int numWordsHelper(WordNode currentNode) const;
+	void emptyWordTree();
+	void emptyWordTreeHelper(WordNode*& currentNode);
 };
 
