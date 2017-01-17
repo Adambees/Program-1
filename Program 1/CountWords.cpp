@@ -3,36 +3,53 @@
 #include "WordTree.h"
 using namespace std;
 
+bool isValidString(const string& inString) {
+	for (int i = 0; i < int(inString.length()); i++) {
+		if (isdigit(inString[i])) {
+			return false;
+		}
+	}
+	return true;
+}
+
 int main()
 {
-	ifstream infile("SampleTextFile.txt");
+	ifstream infile("SampleTextDoc.txt");
 	if (!infile) {
 		cout << "File could not be opened." << endl;
 		return 1;
 	}
 	WordTree myWordTree;
+
 	for (;;) {
 		if (infile.eof()) { break; }
 		string currentString;
 		
 		infile >> currentString; 
-		//need to split hyphenated words
+
 		bool isValid = isValidString(currentString);
+		
 		if (isValid) {
+			int wordIterator = 0;
+			while (wordIterator < int(currentString.length())) {
+				if (currentString[wordIterator] == '-') {
+					string firstWord = currentString.substr(0, wordIterator);
+					string secondWord = currentString.substr(wordIterator + 1, currentString.length() + 1);
+					myWordTree.add(firstWord);
+					myWordTree.add(secondWord);
+					break;
+				}
+				else {
+					wordIterator++;
+				}
+			}
 			myWordTree.add(currentString);
 		}
-
+		
 	}
+	cout << myWordTree;
 
-	return 0;
+	return 1;
 }
 
-bool isValidString(string& inString) {
-	bool isValid = true;
-	for (int i = 0; i < inString.length; i++) {
-		if (isdigit(inString[i])) {
-			isValid = false;
-			break;
-		}
-	}
-}
+

@@ -22,15 +22,17 @@ private:
 		WordNode* right;
 		WordNode(std::string inWord){
 			word = inWord;
-			count = 0;
+			count = 1;
 			left = NULL;
 			right = NULL;
 		}
 	};
 	WordNode* root;
+
 	void addHelper(std::string, WordNode* currentNode);
 	int numWordsHelper(WordNode* currentNode) const;
 	void emptyWordTree();
 	void emptyWordTreeHelper(WordNode*& currentNode);
+	static std::ostream& printHelper(std::ostream&, const WordNode* currentNode);
 };
 

@@ -51,6 +51,7 @@ int WordTree::numWords() const{
 		return numWordsHelper(this->root);
 	}
 }
+
 int WordTree::numWordsHelper(WordNode* currentNode) const{
 	if (currentNode != NULL) {
 		return 1 + numWordsHelper(currentNode->left) + numWordsHelper(currentNode->right);
@@ -62,6 +63,7 @@ void WordTree::emptyWordTree(){
 		emptyWordTreeHelper(this->root);
 	}
 }
+
 void WordTree::emptyWordTreeHelper(WordNode*& currentNode) {
 	if (currentNode != NULL) {
 		emptyWordTreeHelper(currentNode->left);
@@ -70,9 +72,18 @@ void WordTree::emptyWordTreeHelper(WordNode*& currentNode) {
 		currentNode = nullptr;
 	}
 }
+
 std::ostream& operator<<(std::ostream& output, const WordTree& inTree) {
 
+	return WordTree::printHelper(output, inTree.root);
+}
 
-	return output;
+std::ostream& WordTree::printHelper(std::ostream& output, const WordNode* currentNode) {
+	if (currentNode != NULL) {
+		printHelper(output, currentNode->left);
+		output << currentNode->word << " occurs: " << currentNode->count << " time(s)" << std::endl; 
+		printHelper(output, currentNode->right);
+		return output;
+	}	
 }
 ;
