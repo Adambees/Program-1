@@ -13,7 +13,7 @@ public:
 	~WordTree();
 	
 	void add(std::string word);
-	const int numWords() const;
+	int numWords() const;
 private:
 	struct WordNode { 
 		std::string word;
@@ -29,7 +29,7 @@ private:
 	};
 	WordNode* root;
 	void addHelper(std::string, WordNode* currentNode);
-	int numWordsHelper(WordNode currentNode) const;
+	int numWordsHelper(WordNode* currentNode) const;
 	void emptyWordTree();
 	void emptyWordTreeHelper(WordNode*& currentNode);
 };
